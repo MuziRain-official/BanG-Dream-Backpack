@@ -1,0 +1,7 @@
+print("lua主函数脚本启动")
+require("InitClassLua")
+require("ItemData")
+require("PlayerData")
+require("MainPanel")
+MainPanel:Show()
+require("BagPanel")
