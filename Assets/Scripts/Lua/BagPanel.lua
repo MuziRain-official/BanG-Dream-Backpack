@@ -69,7 +69,7 @@ function BagPanel:ChangeType(type)
     end
 
     for i = 1,#self.items do
-        GameObject.Destroy(self.items[i].obj)
+        self.items[i]:Destroy()
     end
     self.items = {}
 
@@ -83,20 +83,25 @@ function BagPanel:ChangeType(type)
     end
 
     for i = 1,#nowItems do
-        local grid = {}
-        local prefab = ABMgr.Instance:LoadRes("ui","ItemGrid")
-        grid.obj = Instantiate(prefab)
-        grid.obj.transform:SetParent(self.Content,false)
-        grid.obj.transform.localPosition = Vector3((i-1)%4 * 150,math.floor((i-1)/4)*150)
+        --local grid = {}
+        --local prefab = ABMgr.Instance:LoadRes("ui","ItemGrid")
+        --grid.obj = Instantiate(prefab)
+        --grid.obj.transform:SetParent(self.Content,false)
+        --grid.obj.transform.localPosition = Vector3((i-1)%4 * 150,math.floor((i-1)/4)*150)
+        --
+        --grid.image = grid.obj.transform:Find("Image"):GetComponent(typeof(Image))
+        --grid.text = grid.obj.transform:Find("Text"):GetComponent(typeof(Text))
+        --
+        --local data = ItemData[nowItems[i].id]
+        --local strs = string.split(data.icon,"_")
+        --local spriteAtlas = ABMgr.Instance:LoadRes("ui",strs[1])
+        --grid.image.sprite = spriteAtlas:GetSprite(strs[2])
+        --grid.text.text = nowItems[i].num
         
-        grid.image = grid.obj.transform:Find("Image"):GetComponent(typeof(Image))
-        grid.text = grid.obj.transform:Find("Text"):GetComponent(typeof(Text))
-        
-        local data = ItemData[nowItems[i].id]
-        local strs = string.split(data.icon,"_")
-        local spriteAtlas = ABMgr.Instance:LoadRes("ui",strs[1])
-        grid.image.sprite = spriteAtlas:GetSprite(strs[2])
-        grid.text.text = nowItems[i].num
+        --根据数据创建格子对象，实例化和初始化，设置数量，图标
+        local grid = ItemGrid:new()
+        grid:Init(self.Content,(i-1)%4 * 150,math.floor((i-1)/4)*150)
+        grid:InitData(nowItems[i])
         
         table.insert(self.items,grid)
     end
