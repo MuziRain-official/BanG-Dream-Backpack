@@ -10,8 +10,8 @@ function ItemGrid:Init(father,posx,posy)
     self.obj.transform:SetParent(father,false)
     self.obj.transform.localPosition = Vector3(posx,posy,0)
 
-    self.image = self.obj.transform:Find("Image"):GetComponent(typeof(Image))
-    self.text = self.obj.transform:Find("Text"):GetComponent(typeof(Text))
+    self.image = self.obj.transform:Find("img"):GetComponent(typeof(Image))
+    self.text = self.obj.transform:Find("txt"):GetComponent(typeof(Text))
 end 
 
 function ItemGrid:InitData(data)

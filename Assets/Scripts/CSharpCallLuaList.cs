@@ -14,5 +14,7 @@ public class CSharpCallLuaList
         typeof(UnityAction),
         // Toggle.onValueChanged:AddListener(...) 传入的是带一个 bool 参数的回调
         typeof(UnityAction<bool>),
+        
+        typeof(UnityEngine.EventSystems.UIBehaviour),
     };
 }

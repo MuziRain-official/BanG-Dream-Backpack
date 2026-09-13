@@ -1,66 +1,48 @@
-BagPanel = {}
+BasePanel:subClass("BagPanel")
 
-BagPanel.panelObj = nil
-BagPanel.btnClose = nil
-BagPanel.togEquip = nil
-BagPanel.togItem = nil
-BagPanel.togGem = nil
-BagPanel.svBag = nil
 BagPanel.Content = nil
-
 BagPanel.items = {}
 BagPanel.nowType = -1
 
-function BagPanel:Init()
-    if self.panelObj == nil then
-        local prefab = ABMgr.Instance:LoadRes("ui","BagPanel")
-        self.panelObj = Instantiate(prefab)
-        self.panelObj.transform:SetParent(Canvas,false)
+function BagPanel:Init(name)
+    self.base.Init(self,name)
+    
+    if self.isInitEvent == false then
+        self.Content = self:GetControl("svBag","ScrollRect").transform:Find("Viewport"):Find("Content")
         
-        self.btnClose = self.panelObj.transform:Find("CloseBtn"):GetComponent(typeof(Button))
-        
-        local group =  self.panelObj.transform:Find("TogGroup")
-        self.togEquip = group:Find("TogEquip"):GetComponent(typeof(Toggle))
-        self.togItem = group:Find("TogItem"):GetComponent(typeof(Toggle))
-        self.togGem = group:Find("TogGem"):GetComponent(typeof(Toggle))
-        
-        self.svBag = self.panelObj.transform:Find("Scroll View"):GetComponent(typeof(ScrollRect))
-        self.Content = self.svBag.transform:Find("Viewport"):Find("Content")
-        
-        self.btnClose.onClick:AddListener(function()
+        self:GetControl("btnClose","Button").onClick:AddListener(function()
             self:Hide()
         end)
-        
-        self.togEquip.onValueChanged:AddListener(function(value)
+
+        self:GetControl("togEquip","Toggle").onValueChanged:AddListener(function(value)
             if value == true then
                 self:ChangeType(1)
             end
         end)
-        self.togItem.onValueChanged:AddListener(function(value)
+        self:GetControl("togItem","Toggle").onValueChanged:AddListener(function(value)
             if value == true then
                 self:ChangeType(2)
             end
         end)
-        self.togGem.onValueChanged:AddListener(function(value)
+        self:GetControl("togGem","Toggle").onValueChanged:AddListener(function(value)
             if value == true then
                 self:ChangeType(3)
             end
         end)
+        
+        self.isInitEvent = true
     end
     
 end 
 
-function BagPanel:Show()
-    self:Init()
+function BagPanel:Show(name)
+    self.base.Show(self,name)
     self.panelObj:SetActive(true)
     if self.nowType == -1 then
         self:ChangeType(1)
     end
 end 
 
-function BagPanel:Hide()
-    self.panelObj:SetActive(false)
-end 
 
 function BagPanel:ChangeType(type)
     print("当前界面为"..type)
