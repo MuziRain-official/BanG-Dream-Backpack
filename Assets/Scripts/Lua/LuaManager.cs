@@ -44,7 +44,7 @@ public class LuaManager : MonoBehaviour
             return;
         luaEnv = new LuaEnv();
         
-        luaEnv.AddLoader(MyCustomLoader);
+        // luaEnv.AddLoader(MyCustomLoader);
         luaEnv.AddLoader(MyCustomABLoader);
     }
     
