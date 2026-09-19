@@ -64,5 +64,13 @@ namespace MiniUI
             history.Clear();
             Current = null;
         }
+
+        /// <summary>清空所有窗口：同时清掉历史栈和当前窗口引用。</summary>
+        public override void RemoveAll()
+        {
+            base.RemoveAll();
+            history.Clear();
+            Current = null;
+        }
     }
 }

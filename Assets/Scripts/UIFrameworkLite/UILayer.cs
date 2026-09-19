@@ -32,6 +32,7 @@ namespace MiniUI
 
             screen.ScreenId = id;
             screen.transform.SetParent(transform, false);
+            screen.gameObject.SetActive(false);      // 注册即隐藏，等 Open/Show 时才显示
             screen.CloseRequest += OnCloseRequest;   // 界面请求关闭时转发给本层
             screens.Add(id, screen);
         }
@@ -46,6 +47,16 @@ namespace MiniUI
 
             screen.CloseRequest -= OnCloseRequest;
             screens.Remove(id);
+        }
+
+        /// <summary>注销并销毁本层所有界面（真正移除，不只是隐藏）。</summary>
+        public virtual void RemoveAll()
+        {
+            foreach (UIScreen screen in screens.Values)
+            {
+                if (screen != null) Destroy(screen.gameObject);
+            }
+            screens.Clear();
         }
 
         /// <summary>按 ID 显示界面。</summary>

@@ -21,14 +21,24 @@ namespace MiniUI
 
         private void Awake()
         {
+            // 单例保护：切场景后若又切回含框架的场景，销毁本次新建的整套重复实例，
+            // 避免出现两套 Canvas / EventSystem / UIManager。
+            if (I != null && I != this)
+            {
+                Destroy(transform.root.gameObject);
+                return;
+            }
+
             I = this;
 
             // 没在 Inspector 里拖的话，自动从子物体查找
             if (windowLayer == null) windowLayer = GetComponentInChildren<WindowLayer>();
             if (panelLayer == null) panelLayer = GetComponentInChildren<PanelLayer>();
 
-            // 让 UI 跨场景常驻（不需要可以删掉这行）
-            DontDestroyOnLoad(gameObject);
+            // 让整套 UI 框架（Canvas 根 + UIManager + 图层 + EventSystem）跨场景常驻。
+            // 注意 DontDestroyOnLoad 只对根物体有效，UIManager 是 Canvas 的子物体，
+            // 必须挂到根物体 transform.root 上，而不是本物体。
+            DontDestroyOnLoad(transform.root.gameObject);
         }
 
         // ==================== 注册 ====================
@@ -71,6 +81,27 @@ namespace MiniUI
         {
             windowLayer.HideAll(animate);
             panelLayer.HideAll(animate);
+        }
+
+        // ==================== 清空（切场景用） ====================
+
+        /// <summary>清空所有窗口（销毁）。切场景前调用，清掉上一个场景的窗口。</summary>
+        public void ClearWindows()
+        {
+            if (windowLayer != null) windowLayer.RemoveAll();
+        }
+
+        /// <summary>清空所有面板（销毁，会连导航面板一起清掉，慎用）。</summary>
+        public void ClearPanels()
+        {
+            if (panelLayer != null) panelLayer.RemoveAll();
+        }
+
+        /// <summary>清空所有窗口和面板。</summary>
+        public void ClearAll()
+        {
+            ClearWindows();
+            ClearPanels();
         }
     }
 }

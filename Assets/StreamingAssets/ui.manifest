@@ -1,15 +1,15 @@
 ManifestFileVersion: 0
-CRC: 899093788
+CRC: 2854237766
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: d09e5d8b4c3d690a8c0abe781e7b1b0b
+    Hash: baaad1ad1cea1afa954b1553f27ca12a
   TypeTreeHash:
     serializedVersion: 2
     Hash: 2bb4f6645a3c9cc940442a22884e9362
   IncrementalBuildHash:
     serializedVersion: 2
-    Hash: d09e5d8b4c3d690a8c0abe781e7b1b0b
+    Hash: baaad1ad1cea1afa954b1553f27ca12a
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -71,7 +71,7 @@ SerializeReferenceClassIdentifiers:
   ClassName: UnityEngine.UI.Toggle/ToggleEvent
 Assets:
 - Assets/ABRes/Prefabs/UI/ItemGrid.prefab
+- Assets/ABRes/Prefabs/UI/BagPanel.prefab
 - Assets/ABRes/SpriteAltas/Icon.spriteatlasv2
 - Assets/ABRes/Prefabs/UI/MainPanel.prefab
-- Assets/ABRes/Prefabs/UI/BagPanel.prefab
 Dependencies: []

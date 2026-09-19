@@ -31,6 +31,14 @@ namespace MiniUI
             Debug.Log("开始游戏！");
             Close();   // 请求关闭自己，窗口层会自动返回上一个窗口
         }
+        
+        // 打开第二个窗口（挂到 StartWindow 里的某个 Button 上）
+        public void UI_OpenSecond()
+        {
+            UIManager.I.OpenWindow("SecondWindow",
+                new SecondWindowData { Message = "这是第二个窗口" });
+        }
+
     }
     
 }

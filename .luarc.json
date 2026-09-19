@@ -1,0 +1,14 @@
+{
+  "$schema": "https://raw.githubusercontent.com/sumneko/vscode-lua/master/setting/schema.json",
+  "runtime.version": "Lua 5.3",
+  "diagnostics.disable": [
+    "undefined-global",
+    "undefined-field"
+  ],
+  "workspace.ignoreDir": [
+    "Library",
+    "Temp",
+    "AssetBundles",
+    "Assets/XLua"
+  ]
+}
